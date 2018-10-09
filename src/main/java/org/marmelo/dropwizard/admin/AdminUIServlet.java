@@ -45,10 +45,32 @@ public class AdminUIServlet extends HttpServlet {
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         response.setStatus(HttpServletResponse.SC_OK);
 
-        final String resource = "/org/marmelo/dropwizard/admin/index.html";
+        final String basedir = "/org/marmelo/dropwizard/admin/";
+        final String path = request.getPathInfo();
+        final String resource;
+
+        if (path == null || path.isEmpty()) {
+            // send trailing slash redirect
+            response.sendRedirect(request.getRequestURL()
+                    .append("/")
+                    .toString());
+            return;
+        } else if (path.equals("/") || path.equals("/index.html")) {
+            // serve html
+            resource = "index.html";
+            response.setContentType("text/html");
+        } else if (path.equals("/bundle.js")) {
+            // serve javascript
+            resource = "bundle.js";
+            response.setContentType("application/javascript");
+        } else {
+            // send 404 not found error
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
 
         try (PrintWriter writer = response.getWriter()) {
-            final InputStream in = this.getClass().getResourceAsStream(resource);
+            final InputStream in = this.getClass().getResourceAsStream(basedir + resource);
             final BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             reader.lines().forEach(writer::println);
         }

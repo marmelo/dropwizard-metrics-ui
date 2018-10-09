@@ -36,8 +36,7 @@ class App extends Component {
     }
     
     componentDidMount() {
-        /*
-        fetch('metrics')
+        fetch('/metrics')
             .then(response => response.json())
             .then(responseJson => this.setState({
                 data: responseJson,
@@ -54,12 +53,13 @@ class App extends Component {
                 error: error,
                 isLoading: false
             }));
-        */
-        
+            
+        /*
         this.setState({
             data: mock,
             isLoading: false
         });
+        */
     }
     
     render() {

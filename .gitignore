@@ -2,3 +2,5 @@
 /src/main/webapp/dist
 /src/main/webapp/node_modules
 /src/main/webapp/package-lock.json
+/src/main/resources/org/marmelo/dropwizard/admin/bundle.js
+/src/main/resources/org/marmelo/dropwizard/admin/index.html
