@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.marmelo.dropwizard.metrics;
+package org.marmelo.dropwizard.metrics.servlets;
 
 import java.io.BufferedReader;
 import java.io.IOException;

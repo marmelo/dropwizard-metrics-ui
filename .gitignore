@@ -2,5 +2,4 @@
 /src/main/webapp/dist
 /src/main/webapp/node_modules
 /src/main/webapp/package-lock.json
-/src/main/resources/org/marmelo/dropwizard/metrics/bundle.js
-/src/main/resources/org/marmelo/dropwizard/metrics/index.html
+/src/main/resources/org/marmelo/dropwizard/metrics/*
