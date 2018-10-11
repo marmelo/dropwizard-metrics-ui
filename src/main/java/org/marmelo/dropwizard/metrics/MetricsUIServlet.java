@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.marmelo.dropwizard.admin;
+package org.marmelo.dropwizard.metrics;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,18 +34,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Dropwizard Admin UI Servlet.
+ * Dropwizard Metrics UI Servlet.
  *
  * @author Rafael Marmelo
  * @since 1.0
  */
-public class AdminUIServlet extends HttpServlet {
+public class MetricsUIServlet extends HttpServlet {
 
     @Override
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         response.setStatus(HttpServletResponse.SC_OK);
 
-        final String basedir = "/org/marmelo/dropwizard/admin/";
+        final String basedir = "/org/marmelo/dropwizard/metrics/";
         final String path = request.getPathInfo();
         final String resource;
 

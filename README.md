@@ -1,1 +1,1 @@
-# dropwizard-admin-ui
+# Dropwizard Metrics UI

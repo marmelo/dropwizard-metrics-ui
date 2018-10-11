@@ -1,5 +1,5 @@
 {
-  "name": "dropwizard-admin-ui",
+  "name": "dropwizard-metrics-ui",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

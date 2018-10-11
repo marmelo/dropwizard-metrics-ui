@@ -68,7 +68,7 @@ class App extends Component {
                 <Affix>
                     <Header>
                         <div className="logo"/>
-                        <div className="title">Dropwizard Admin</div>
+                        <div className="title">Dropwizard Metrics</div>
                         <div className="refresh">
                             <Switch checkedChildren={<Icon type="check" />} unCheckedChildren={<Icon type="close" />} defaultChecked />
                         </div>

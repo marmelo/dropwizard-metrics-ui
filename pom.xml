@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.marmelo.dropwizard</groupId>
-    <artifactId>dropwizard-admin-ui</artifactId>
+    <artifactId>dropwizard-metrics-ui</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>dropwizard-admin-ui</name>
-    <url>https://github.com/marmelo/dropwizard-admin-ui</url>
+    <name>dropwizard-metrics-ui</name>
+    <url>https://github.com/marmelo/dropwizard-metrics-ui</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -5,7 +5,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const config = {
     entry: './src/index.js',
     output: {
-        path: path.resolve(__dirname, '../resources/org/marmelo/dropwizard/admin'),
+        path: path.resolve(__dirname, '../resources/org/marmelo/dropwizard/metrics'),
         filename: 'bundle.js'
     },
     module: {
