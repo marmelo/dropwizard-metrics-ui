@@ -29,39 +29,44 @@ class App extends Component {
                 counters: {},
                 histograms: {},
                 meters: {},
-                timers: {},
-            },
-            isLoading: true
+                timers: {}
+            }
         };
     }
     
     componentDidMount() {
+        this.timer();
+        this.interval = setInterval(this.timer.bind(this), 1000);
+    }
+
+    componentWillUnmount() {
+       clearInterval(this.interval);
+    }
+    
+    timer() {
         fetch('/metrics')
             .then(response => response.json())
             .then(responseJson => this.setState({
-                data: responseJson,
-                isLoading: false
+                data: responseJson
             }))
             .catch(error => this.setState({
                 data: {
-                    gauges: [],
-                    counters: [],
-                    histograms: [],
-                    meters: [],
-                    timers: [],
+                    gauges: {},
+                    counters: {},
+                    histograms: {},
+                    meters: {},
+                    timers: {}
                 },
-                error: error,
-                isLoading: false
+                error: error
             }));
-            
-        /*
-        this.setState({
-            data: mock,
-            isLoading: false
-        });
-        */
     }
     
+    timerMock() {
+        this.setState({
+            data: mock
+        });
+    }
+
     render() {
         return (
             <Layout>
