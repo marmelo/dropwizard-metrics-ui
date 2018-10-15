@@ -72,7 +72,11 @@ public class MetricsUIServlet extends HttpServlet {
         try (PrintWriter writer = response.getWriter()) {
             final InputStream in = this.getClass().getResourceAsStream(basedir + resource);
             final BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            reader.lines().forEach(writer::println);
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                writer.println(line);
+            }
         }
     }
 }
