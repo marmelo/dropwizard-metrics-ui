@@ -1,6 +1,6 @@
 @import '~antd/dist/antd.css';
 
-.logo {
+.ant-layout-header .logo {
   width: 31px;
   height: 31px;
   background: rgba(255,255,255,.2);
@@ -8,13 +8,36 @@
   float: left;
 }
 
-.title {
+.ant-layout-header .title {
   color: #fff;
+  font-weight: bold;
   margin: 0 28px 0 0;
   float: left;
 }
 
-.refresh {
+.ant-layout-header .refresh {
   color: #fff;
   float: right;
+}
+
+
+.dwm-core, .dwm-overview, .dwm-jvm {
+    margin-top: 16px;
+}
+
+.dwm-overview span {
+    font-weight: bold;
+    display: block;
+}
+
+.dwm-jvm .ant-card-extra span {
+    font-weight: bold;
+}
+
+.dwm-jvm .ant-card-extra span:not(:first-child) {
+    margin-left: 10px;
+}
+
+.dwm-jvm .ant-card-grid .ant-card-body {
+    padding: 18px 8px 0 8px;
 }

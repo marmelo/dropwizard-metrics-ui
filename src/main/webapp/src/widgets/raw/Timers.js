@@ -18,7 +18,7 @@ class Timers extends AbstractWidget {
             { title: 'Min', dataIndex: 'min', key: 'min', align: 'right', render: this.formatSeconds },
             { title: 'Mean', dataIndex: 'mean', key: 'mean', align: 'right', render: this.formatSeconds },
             { title: 'Max', dataIndex: 'max', key: 'max', align: 'right', render: this.formatSeconds },
-            { title: 'StdDev', dataIndex: 'stddev', key: 'stddev', align: 'stddev', render: this.formatSeconds },
+            { title: 'StdDev', dataIndex: 'stddev', key: 'stddev', align: 'right', render: this.formatSeconds },
             { title: 'p50', dataIndex: 'p50', key: 'p50', align: 'right', render: this.formatSeconds },
             { title: 'p75', dataIndex: 'p75', key: 'p75', align: 'right', render: this.formatSeconds },
             { title: 'p95', dataIndex: 'p95', key: 'p95', align: 'right', render: this.formatSeconds },
@@ -30,8 +30,8 @@ class Timers extends AbstractWidget {
         ];
         
         return (
-            <Card title="Timers">
-                <Table dataSource={data} columns={columns} size="middle" scroll={{ x: 2000 }}/>
+            <Card title="Timers" className="dwm-core">
+                <Table dataSource={data} columns={columns} pagination={{ pageSize: 5 }} size="middle" scroll={{ x: 2000 }}/>
             </Card>
         );
     }

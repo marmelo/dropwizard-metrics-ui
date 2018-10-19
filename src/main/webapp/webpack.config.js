@@ -26,7 +26,16 @@ const config = {
             template: "./src/index.html",
             filename: "./index.html"
         })
-    ]
+    ],
+    devServer: {
+        proxy: {
+          '/metrics': 'http://127.0.0.1:8081',
+          '/ping': 'http://127.0.0.1:8081',
+          '/threads': 'http://127.0.0.1:8081',
+          '/healthcheck': 'http://127.0.0.1:8081',
+          '/tasks': 'http://127.0.0.1:8081'
+        }
+    }
 };
 
 module.exports = config;

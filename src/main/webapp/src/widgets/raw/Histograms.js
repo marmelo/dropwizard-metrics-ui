@@ -13,8 +13,8 @@ class Histograms extends AbstractWidget {
         ];
         
         return (
-            <Card title="Histograms">
-                <Table dataSource={data} columns={columns} size="middle"/>
+            <Card title="Histograms" className="dwm-core">
+                <Table dataSource={data} columns={columns} pagination={{ pageSize: 5 }} size="middle"/>
             </Card>
         );
     }

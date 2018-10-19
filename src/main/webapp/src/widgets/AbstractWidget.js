@@ -19,6 +19,14 @@ class AbstractWidget extends Component {
         
         return data;
     }
+    
+    getGauge(name) {
+        const props = this.props || {};
+        const data = props.data || {};
+        const gauges = data.gauges || {};
+        const gauge = gauges[name];
+        return gauge ? gauge.value : null;
+    }
 
     formatEventsPerSecond(n) {
         return parseFloat(n).toFixed(3) + " ev/s";

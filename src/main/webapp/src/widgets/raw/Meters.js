@@ -18,8 +18,8 @@ class Meters extends AbstractWidget {
         ];
         
         return (
-            <Card title="Meters">
-                <Table dataSource={data} columns={columns} size="middle"/>
+            <Card title="Meters" className="dwm-core">
+                <Table dataSource={data} columns={columns} pagination={{ pageSize: 5 }} size="middle"/>
             </Card>
         );
     }

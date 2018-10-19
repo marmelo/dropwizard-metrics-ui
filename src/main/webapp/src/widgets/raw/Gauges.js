@@ -14,8 +14,8 @@ class Gauges extends AbstractWidget {
         ];
         
         return (
-            <Card title="Gauges">
-                <Table dataSource={data} columns={columns} size="middle"/>
+            <Card title="Gauges" className="dwm-core">
+                <Table dataSource={data} columns={columns} pagination={{ pageSize: 5 }} size="middle"/>
             </Card>
         );
     }

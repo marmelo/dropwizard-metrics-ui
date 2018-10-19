@@ -14,8 +14,8 @@ class Counters extends AbstractWidget {
         ];
         
         return (
-            <Card title="Counters">
-                <Table dataSource={data} columns={columns} size="middle"/>
+            <Card title="Counters" className="dwm-core">
+                <Table dataSource={data} columns={columns} pagination={{ pageSize: 5 }} size="middle"/>
             </Card>
         );
     }
