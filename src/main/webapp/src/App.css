@@ -21,7 +21,7 @@
 }
 
 
-.dwm-core, .dwm-overview, .dwm-jvm {
+.dwm-core, .dwm-overview, .dwm-jvm, .dwm-requests {
     margin-top: 16px;
 }
 
@@ -30,14 +30,22 @@
     display: block;
 }
 
-.dwm-jvm .ant-card-extra span {
+.ant-card-extra span {
     font-weight: bold;
 }
 
-.dwm-jvm .ant-card-extra span:not(:first-child) {
+.ant-card-extra span:not(:first-child) {
     margin-left: 10px;
 }
 
-.dwm-jvm .ant-card-grid .ant-card-body {
+.dwm-jvm .ant-card-grid .ant-card-extra {
+    max-width: 73%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.dwm-jvm .ant-card-grid .ant-card-body,
+.dwm-requests .ant-card-grid .ant-card-body {
+    font-size: 12px;
     padding: 18px 8px 0 8px;
 }

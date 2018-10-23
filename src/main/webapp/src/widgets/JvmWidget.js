@@ -32,16 +32,13 @@ class JvmWidget extends AbstractWidget {
         
         return (
             <Card title="JVM" extra={vendor} className="dwm-jvm">
-                <Card.Grid style={{ width: '50%' }}>
+                <Card.Grid style={{ width: '34%' }}>
                     <HeapWidget data={this.props.data}/>
                 </Card.Grid>
-                <Card.Grid style={{ width: '50%' }}>
-                    <NonHeapWidget data={this.props.data}/>
-                </Card.Grid>
-                <Card.Grid style={{ width: '50%' }}>
+                <Card.Grid style={{ width: '33%' }}>
                     <ClassesWidget data={this.props.data}/>
                 </Card.Grid>
-                <Card.Grid style={{ width: '50%' }}>
+                <Card.Grid style={{ width: '33%' }}>
                     <ThreadsWidget data={this.props.data}/>
                 </Card.Grid>
             </Card>

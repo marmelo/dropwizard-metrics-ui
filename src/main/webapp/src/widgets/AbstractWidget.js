@@ -27,6 +27,22 @@ class AbstractWidget extends Component {
         const gauge = gauges[name];
         return gauge ? gauge.value : null;
     }
+    
+    getMeter(name) {
+        const props = this.props || {};
+        const data = props.data || {};
+        const meters = data.meters || {};
+        const meter = meters[name];
+        return meter;
+    }
+    
+    getTimer(name) {
+        const props = this.props || {};
+        const data = props.data || {};
+        const timers = data.timers || {};
+        const timer = timers[name];
+        return timer;
+    }
 
     formatEventsPerSecond(n) {
         return parseFloat(n).toFixed(3) + " ev/s";

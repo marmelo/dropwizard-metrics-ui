@@ -10,6 +10,7 @@ import Card from 'antd/lib/card';
 
 import OverviewWidget from './widgets/OverviewWidget.js'
 import JvmWidget from './widgets/JvmWidget.js'
+import RequestsWidget from './widgets/RequestsWidget.js'
 
 import Gauges from './widgets/raw/Gauges.js'
 import Counters from './widgets/raw/Counters.js'
@@ -76,13 +77,6 @@ class App extends Component {
                             <span style={{marginRight: "12px", color: "rgba(255, 255, 255, 0.65)"}}>Auto Refresh</span>
                             <Switch checkedChildren={<Icon type="check" />} unCheckedChildren={<Icon type="close" />} defaultChecked />
                         </div>
-                        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']} style={{lineHeight: '64px' }}>
-                            <Menu.Item key="1">Gauges</Menu.Item>
-                            <Menu.Item key="2">Counters</Menu.Item>
-                            <Menu.Item key="3">Histograms</Menu.Item>
-                            <Menu.Item key="4">Metrics</Menu.Item>
-                            <Menu.Item key="5">Timers</Menu.Item>
-                        </Menu>
                     </Header>
                 </Affix>
                 <Content style={{margin: '0 40px' }}>
@@ -94,6 +88,11 @@ class App extends Component {
                     <Row gutter={16}>
                         <Col span={24}>
                             <JvmWidget data={this.state.data}/>
+                        </Col>
+                    </Row>
+                    <Row gutter={16}>
+                        <Col span={24}>
+                            <RequestsWidget data={this.state.data}/>
                         </Col>
                     </Row>
                     <Row gutter={16}>
