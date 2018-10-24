@@ -55,7 +55,8 @@ class RequestStatusWidget extends AbstractWidget {
         }
         
         // recharts require a new array instance
-        const data = this.data.slice();
+        const start = new Date().getTime() - 60000;
+        const data = this.data.filter(entry => entry.timestamp >= start);
                 
         const extra =
             <div className="card-extra">
@@ -82,11 +83,11 @@ class RequestStatusWidget extends AbstractWidget {
                         <YAxis type="number" domain={[0, "auto"]}/>
                         <CartesianGrid stroke="#eee"/>
                         <Legend verticalAlign="bottom" height={36}/>
-                        <Line type="step" dataKey="rate1xx" name="1xx" stroke={color.yellow} strokeWidth={2}/>
-                        <Line type="step" dataKey="rate2xx" name="2xx" stroke={color.green} strokeWidth={2}/>
-                        <Line type="step" dataKey="rate3xx" name="3xx" stroke={color.blue} strokeWidth={2}/>
-                        <Line type="step" dataKey="rate4xx" name="4xx" stroke={color.red} strokeWidth={2}/>
-                        <Line type="step" dataKey="rate5xx" name="5xx" stroke={color.orange} strokeWidth={2}/>
+                        <Line type="step" dataKey="rate1xx" name="1xx" stroke={color.yellow} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="step" dataKey="rate2xx" name="2xx" stroke={color.green} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="step" dataKey="rate3xx" name="3xx" stroke={color.blue} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="step" dataKey="rate4xx" name="4xx" stroke={color.red} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="step" dataKey="rate5xx" name="5xx" stroke={color.orange} strokeWidth={2} dot={false} isAnimationActive={false}/>
                     </LineChart>
                 </ResponsiveContainer>
             </Card>

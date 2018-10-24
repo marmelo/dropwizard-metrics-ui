@@ -51,7 +51,8 @@ class RequestMethodsWidget extends AbstractWidget {
         }
         
         // recharts require a new array instance
-        const data = this.data.slice();
+        const start = new Date().getTime() - 60000;
+        const data = this.data.filter(entry => entry.timestamp >= start);
                 
         const extra =
             <div className="card-extra">
@@ -78,11 +79,11 @@ class RequestMethodsWidget extends AbstractWidget {
                         <YAxis type="number" domain={[0, "auto"]}/>
                         <CartesianGrid stroke="#eee"/>
                         <Legend verticalAlign="bottom" height={36}/>
-                        <Line type="step" dataKey="rateGet" name="GET" stroke={color.green} strokeWidth={2}/>
-                        <Line type="step" dataKey="ratePost" name="POST" stroke={color.blue} strokeWidth={2}/>
-                        <Line type="step" dataKey="ratePut" name="PUT" stroke={color.orange} strokeWidth={2}/>
-                        <Line type="step" dataKey="rateDelete" name="DELETE" stroke={color.red} strokeWidth={2}/>
-                        <Line type="step" dataKey="rateOther" name="Other" stroke={color.yellow} strokeWidth={2}/>
+                        <Line type="step" dataKey="rateGet" name="GET" stroke={color.green} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="step" dataKey="ratePost" name="POST" stroke={color.blue} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="step" dataKey="ratePut" name="PUT" stroke={color.orange} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="step" dataKey="rateDelete" name="DELETE" stroke={color.red} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="step" dataKey="rateOther" name="Other" stroke={color.yellow} strokeWidth={2} dot={false} isAnimationActive={false}/>
                     </LineChart>
                 </ResponsiveContainer>
             </Card>
