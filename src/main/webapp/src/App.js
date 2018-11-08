@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Layout from 'antd/lib/layout';
 import Menu from 'antd/lib/menu';
-import Switch from 'antd/lib/switch';
 import Icon from 'antd/lib/icon';
 import Row from 'antd/lib/row';
 import Col from 'antd/lib/col';
@@ -11,14 +10,8 @@ import Card from 'antd/lib/card';
 import OverviewWidget from './widgets/OverviewWidget.js'
 import JvmWidget from './widgets/JvmWidget.js'
 import RequestsWidget from './widgets/RequestsWidget.js'
+import MetricsWidget from './widgets/MetricsWidget.js'
 
-import Gauges from './widgets/raw/Gauges.js'
-import Counters from './widgets/raw/Counters.js'
-import Histograms from './widgets/raw/Histograms.js'
-import Meters from './widgets/raw/Meters.js'
-import Timers from './widgets/raw/Timers.js'
-
-import mock from './mock/mock.js';
 import './App.css';
 
 const { Header, Footer, Content } = Layout;
@@ -52,6 +45,7 @@ class App extends Component {
         fetch('/metrics')
             .then(response => response.json())
             .then(responseJson => this.setState({
+                ts: new Date(),
                 data: responseJson
             }))
             .catch(error => this.setState({
@@ -74,8 +68,7 @@ class App extends Component {
                         <div className="logo"/>
                         <div className="title">Dropwizard Metrics</div>
                         <div className="refresh">
-                            <span style={{marginRight: "12px", color: "rgba(255, 255, 255, 0.65)"}}>Auto Refresh</span>
-                            <Switch checkedChildren={<Icon type="check" />} unCheckedChildren={<Icon type="close" />} defaultChecked />
+                            <span style={{marginRight: "12px", color: "rgba(255, 255, 255, 0.65)"}}>{ this.state.ts && this.state.ts.toGMTString() }</span>
                         </div>
                     </Header>
                 </Affix>
@@ -97,27 +90,7 @@ class App extends Component {
                     </Row>
                     <Row gutter={16}>
                         <Col span={24}>
-                            <Gauges data={this.state.data.gauges}/>
-                        </Col>
-                    </Row>
-                    <Row gutter={16}>
-                        <Col span={24}>
-                            <Counters data={this.state.data.counters}/>
-                        </Col>
-                    </Row>
-                    <Row gutter={16}>
-                        <Col span={24}>
-                            <Histograms data={this.state.data.histograms}/>
-                        </Col>
-                    </Row>
-                    <Row gutter={16}>
-                        <Col span={24}>
-                            <Meters data={this.state.data.meters}/>
-                        </Col>
-                    </Row>
-                    <Row gutter={16}>
-                        <Col span={24}>
-                            <Timers data={this.state.data.timers}/>
+                            <MetricsWidget data={this.state.data}/>
                         </Col>
                     </Row>
                 </Content>

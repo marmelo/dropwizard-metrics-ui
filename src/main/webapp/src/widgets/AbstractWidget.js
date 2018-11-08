@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 class AbstractWidget extends Component {
     
-    getData() {
+    getData(rawDataOverride) {
         const data = [];
-        const rawData = this.props.data;
+        const rawData = rawDataOverride || this.props.data;
         
         Object.keys(rawData).forEach(function(key) {
             const entry = {};
