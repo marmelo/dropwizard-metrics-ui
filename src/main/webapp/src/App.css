@@ -22,7 +22,7 @@
 }
 
 
-.dwm-core, .dwm-overview, .dwm-jvm, .dwm-requests {
+.dwm-core, .dwm-overview, .dwm-jvm, .dwm-requests, .dwm-log {
     margin-top: 16px;
 }
 
@@ -46,7 +46,8 @@
 }
 
 .dwm-jvm .ant-card-grid .ant-card-body,
-.dwm-requests .ant-card-grid .ant-card-body {
+.dwm-requests .ant-card-grid .ant-card-body,
+.dwm-log .ant-card-grid .ant-card-body {
     font-size: 12px;
-    padding: 18px 8px 0 8px;
+    padding: 18px 8px 0 0;
 }

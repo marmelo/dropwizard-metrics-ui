@@ -11,6 +11,7 @@ import OverviewWidget from './widgets/OverviewWidget.js'
 import JvmWidget from './widgets/JvmWidget.js'
 import RequestsWidget from './widgets/RequestsWidget.js'
 import MetricsWidget from './widgets/MetricsWidget.js'
+import LogWidget from './widgets/LogWidget.js'
 
 import './App.css';
 
@@ -86,6 +87,11 @@ class App extends Component {
                     <Row gutter={16}>
                         <Col span={24}>
                             <RequestsWidget data={this.state.data}/>
+                        </Col>
+                    </Row>
+                    <Row gutter={16}>
+                        <Col span={24}>
+                            <LogWidget data={this.state.data}/>
                         </Col>
                     </Row>
                     <Row gutter={16}>
