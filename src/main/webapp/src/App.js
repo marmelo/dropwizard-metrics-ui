@@ -14,6 +14,7 @@ import MetricsWidget from './widgets/MetricsWidget.js'
 import LogWidget from './widgets/LogWidget.js'
 
 import './App.css';
+import logo from './dropwizard.png';
 
 const { Header, Footer, Content } = Layout;
 
@@ -66,11 +67,9 @@ class App extends Component {
             <Layout>
                 <Affix>
                     <Header>
-                        <div className="logo"/>
+                        <img src={logo} className="logo"/>
                         <div className="title">Dropwizard Metrics</div>
-                        <div className="refresh">
-                            <span style={{marginRight: "12px", color: "rgba(255, 255, 255, 0.65)"}}>{ this.state.ts && this.state.ts.toGMTString() }</span>
-                        </div>
+                        <span className="timestamp">{ this.state.ts && this.state.ts.toGMTString() }</span>
                     </Header>
                 </Affix>
                 <Content style={{margin: '0 40px' }}>

@@ -18,11 +18,11 @@ class ClassesWidget extends AbstractWidget {
     }
     
     render() {
-        const classesLoaded = this.getGauge('jvm.classloader.loaded') || -1;
-        const classesUnloaded = this.getGauge('jvm.classloader.unloaded') || -1;
+        const classesLoaded = this.getGauge('jvm.classloader.loaded');
+        const classesUnloaded = this.getGauge('jvm.classloader.unloaded');
         
         // TODO wrong
-        if (classesLoaded >= 0) {
+        if (classesLoaded) {
             this.data.push({
                 timestamp: new Date().getTime(),
                 loaded: classesLoaded,

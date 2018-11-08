@@ -1,23 +1,22 @@
 @import '~antd/dist/antd.css';
 
 .ant-layout-header .logo {
-  width: 31px;
   height: 31px;
-  background: rgba(255,255,255,.2);
-  margin: 16px 28px 16px 0;
+  margin: 16px 24px 16px 0;
   float: left;
 }
 
 .ant-layout-header .title {
   color: #fff;
-  font-size: 1.5em;
+  font-size: 1.4em;
   font-weight: bold;
   margin: 0 28px 0 0;
   float: left;
 }
 
-.ant-layout-header .refresh {
-  color: #fff;
+.ant-layout-header .timestamp {
+  color: rgba(255, 255, 255, 0.65);
+  margin-right: 12px;
   float: right;
 }
 
