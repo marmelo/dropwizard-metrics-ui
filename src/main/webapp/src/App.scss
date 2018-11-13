@@ -1,25 +1,26 @@
 @import '~antd/dist/antd.min.css';
 
-.ant-layout-header .logo {
-  height: 31px;
-  margin: 16px 24px 16px 0;
-  float: left;
-}
+.ant-layout-header {
+    .logo {
+        height: 31px;
+        margin: 16px 24px 16px 0;
+        float: left;
+    }
 
-.ant-layout-header .title {
-  color: #fff;
-  font-size: 1.4em;
-  font-weight: bold;
-  margin: 0 28px 0 0;
-  float: left;
-}
+    .title {
+        color: #fff;
+        font-size: 1.4em;
+        font-weight: bold;
+        margin: 0 28px 0 0;
+        float: left;
+    }
 
-.ant-layout-header .timestamp {
-  color: rgba(255, 255, 255, 0.65);
-  margin-right: 12px;
-  float: right;
+    .timestamp {
+        color: rgba(255, 255, 255, 0.65);
+        margin-right: 12px;
+        float: right;
+    }
 }
-
 
 .dwm-core, .dwm-overview, .dwm-jvm, .dwm-requests, .dwm-log {
     margin-top: 16px;
@@ -32,10 +33,10 @@
 
 .ant-card-extra span {
     font-weight: bold;
-}
-
-.ant-card-extra span:not(:first-child) {
-    margin-left: 10px;
+    
+    &:not(:first-child) {
+        margin-left: 10px;
+    }
 }
 
 .dwm-jvm .ant-card-grid .ant-card-extra {

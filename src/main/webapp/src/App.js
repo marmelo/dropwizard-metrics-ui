@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Layout from 'antd/lib/layout';
+import Layout, { Header, Footer, Content } from 'antd/lib/layout';
 import Menu from 'antd/lib/menu';
 import Row from 'antd/lib/row';
 import Col from 'antd/lib/col';
@@ -12,10 +12,8 @@ import RequestsWidget from './widgets/RequestsWidget.js'
 import MetricsWidget from './widgets/MetricsWidget.js'
 import LogWidget from './widgets/LogWidget.js'
 
-import './App.css';
+import './App.scss';
 import logo from './dropwizard.png';
-
-const { Header, Footer, Content } = Layout;
 
 class App extends Component {
     
