@@ -47,7 +47,7 @@ class LogLevelsWidget extends AbstractWidget {
         this.error = levelError.count;
         
         // TODO wrong
-        if (true) {
+        if (!isNaN(rateInfo)) {
             this.data.push({
                 timestamp: new Date().getTime(),
                 rateTrace: rateTrace,
@@ -59,8 +59,7 @@ class LogLevelsWidget extends AbstractWidget {
         }
         
         // recharts require a new array instance
-        const start = new Date().getTime() - 60000;
-        const data = this.data.filter(entry => entry.timestamp >= start);
+        const data = this.data.slice();
                 
         const extra =
             <div className="card-extra">
@@ -88,11 +87,11 @@ class LogLevelsWidget extends AbstractWidget {
                         <YAxis type="number" domain={[0, "auto"]}/>
                         <CartesianGrid stroke="#eee"/>
                         <Legend verticalAlign="bottom" height={36}/>
-                        <Line type="step" dataKey="rateTrace" name="Trace" stroke={color.yellow} strokeWidth={2} dot={false} isAnimationActive={false}/>
-                        <Line type="step" dataKey="rateDebug" name="Debug" stroke={color.blue} strokeWidth={2} dot={false} isAnimationActive={false}/>
-                        <Line type="step" dataKey="rateInfo" name="Info" stroke={color.green} strokeWidth={2} dot={false} isAnimationActive={false}/>
-                        <Line type="step" dataKey="rateWarn" name="Warn" stroke={color.orange} strokeWidth={2} dot={false} isAnimationActive={false}/>
-                        <Line type="step" dataKey="rateError" name="Error" stroke={color.red} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="monotone" dataKey="rateTrace" name="Trace" stroke={color.yellow} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="monotone" dataKey="rateDebug" name="Debug" stroke={color.blue} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="monotone" dataKey="rateInfo" name="Info" stroke={color.green} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="monotone" dataKey="rateWarn" name="Warn" stroke={color.orange} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="monotone" dataKey="rateError" name="Error" stroke={color.red} strokeWidth={2} dot={false} isAnimationActive={false}/>
                     </LineChart>
                 </ResponsiveContainer>
             </Card>

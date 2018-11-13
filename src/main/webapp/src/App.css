@@ -1,4 +1,4 @@
-@import '~antd/dist/antd.css';
+@import '~antd/dist/antd.min.css';
 
 .ant-layout-header .logo {
   height: 31px;
@@ -39,7 +39,7 @@
 }
 
 .dwm-jvm .ant-card-grid .ant-card-extra {
-    max-width: 73%;
+    max-width: 85%;
     white-space: nowrap;
     overflow: hidden;
 }

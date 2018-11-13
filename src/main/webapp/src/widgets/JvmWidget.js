@@ -10,7 +10,6 @@ import { ResponsiveContainer, AreaChart, Area, LineChart, Line, XAxis, YAxis, Ca
 import AbstractWidget from './AbstractWidget.js';
 
 import HeapWidget from './jvm/HeapWidget.js'
-import NonHeapWidget from './jvm/NonHeapWidget.js'
 import ClassesWidget from './jvm/ClassesWidget.js'
 import ThreadsWidget from './jvm/ThreadsWidget.js'
 
@@ -32,13 +31,13 @@ class JvmWidget extends AbstractWidget {
         
         return (
             <Card title="JVM" extra={vendor} className="dwm-jvm">
-                <Card.Grid style={{ width: '34%' }}>
+                <Card.Grid style={{ width: '100%' }}>
                     <HeapWidget data={this.props.data}/>
                 </Card.Grid>
-                <Card.Grid style={{ width: '33%' }}>
+                <Card.Grid style={{ width: '50%' }}>
                     <ClassesWidget data={this.props.data}/>
                 </Card.Grid>
-                <Card.Grid style={{ width: '33%' }}>
+                <Card.Grid style={{ width: '50%' }}>
                     <ThreadsWidget data={this.props.data}/>
                 </Card.Grid>
             </Card>

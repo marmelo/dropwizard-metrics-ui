@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Layout from 'antd/lib/layout';
 import Menu from 'antd/lib/menu';
-import Icon from 'antd/lib/icon';
 import Row from 'antd/lib/row';
 import Col from 'antd/lib/col';
 import Affix from 'antd/lib/affix';
@@ -100,7 +99,7 @@ class App extends Component {
                     </Row>
                 </Content>
                 <Footer style={{textAlign: 'center' }}>
-                    © 2018 Created by Rafael Marmelo
+                    © 2018 Created by <a src="https://github.com/marmelo">Rafael Marmelo</a> &nbsp;&bull;&nbsp; Fork me on <a src="https://github.com/marmelo/dropwizard-metrics-ui">GitHub</a> &nbsp;&bull;&nbsp; <a src="https://opensource.org/licenses/MIT">MIT License</a> &nbsp;&bull;&nbsp; Created using <a src="https://www.dropwizard.io/">Dropwizard</a>, <a src="https://ant.design/">Ant Design</a>, <a src="https://reactjs.org/">React</a> and <a src="https://recharts.org/">Recharts</a>
                 </Footer>
             </Layout>
         );
