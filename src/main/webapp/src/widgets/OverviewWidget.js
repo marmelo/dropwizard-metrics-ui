@@ -1,67 +1,59 @@
 import React, { Component } from 'react';
-import Table from 'antd/lib/table';
 import Card from 'antd/lib/card';
 import Row from 'antd/lib/row';
 import Col from 'antd/lib/col';
+import { getGauge, getTimer, getMeter, formatTime, formatBytes } from './helpers';
 
-import prettyMs from 'pretty-ms';
-import prettyBytes from 'pretty-bytes';
-
-import AbstractWidget from './AbstractWidget.js';
-
-class OverviewWidget extends AbstractWidget {
+class OverviewWidget extends Component {
 
     constructor(props) {
         super(props);
-        
-        this.requests = 0;
-        this.logs = 0;
+        this.state = {};
     }
-    
+
+    componentWillReceiveProps(nextProps) {
+        const uptime = getGauge('jvm.attribute.uptime', nextProps.data).value;
+        const heapUsed = getGauge('jvm.memory.heap.used', nextProps.data).value;
+        const heapMax = getGauge('jvm.memory.heap.max', nextProps.data).value;
+        const requests = getTimer('io.dropwizard.jetty.MutableServletContextHandler.requests', nextProps.data).count;
+        const logs = getMeter('ch.qos.logback.core.Appender.all', nextProps.data).count;
+
+        this.setState(prevState => ({
+            uptime: uptime,
+            heapUsed: heapUsed,
+            heapMax: heapMax,
+            requestsTotal: requests,
+            requestsRate: requests - prevState.requestsTotal,
+            logsTotal: logs,
+            logsRate: logs - prevState.logsTotal
+        }));
+    }
+
     render() {
-        const uptime = this.getGauge('jvm.attribute.uptime');
-        const uptimePretty = uptime ? prettyMs(uptime, { secDecimalDigits: 0 }) : "-";
-        
-        const heapUsed = this.getGauge('jvm.memory.heap.used') || -1;
-        const heapUsedPretty = prettyBytes(heapUsed);
-        
-        const heapMax = this.getGauge('jvm.memory.heap.max') || -1;
-        const heapMaxPretty = prettyBytes(heapMax);
-        
-        const requests = this.getTimer('io.dropwizard.jetty.MutableServletContextHandler.requests') || {};
-        const requestsTotal = requests.count;
-        const requestsRate = requestsTotal - this.requests;
-        this.requests = requestsTotal;
-
-        const logs = this.getMeter('ch.qos.logback.core.Appender.all') || {};
-        const logsTotal = logs.count;
-        const logsRate = logsTotal - this.logs;
-        this.logs = logsTotal;
-
         return (
             <Row gutter={16}>
                 <Col span={6}>
                     <Card className="dwm-overview">
                         <span>Uptime</span>
-                        {uptimePretty}
+                        {formatTime(this.state.uptime)}
                     </Card>
                 </Col>
                 <Col span={6}>
                     <Card className="dwm-overview">
                         <span>Heap</span>
-                        {heapUsedPretty} out of {heapMaxPretty}
+                        {formatBytes(this.state.heapUsed)} out of {formatBytes(this.state.heapMax)}
                     </Card>
                 </Col>
                 <Col span={6}>
                     <Card className="dwm-overview">
                         <span>Requests</span>
-                        {requestsRate} reqs/s out of {requestsTotal}
+                        {this.state.requestsRate} reqs/s out of {this.state.requestsTotal}
                     </Card>
                 </Col>
                 <Col span={6}>
                     <Card className="dwm-overview">
                         <span>Logs</span>
-                        {logsRate} logs/s out of {logsTotal}
+                        {this.state.logsRate} logs/s out of {this.state.logsTotal}
                     </Card>
                 </Col>
             </Row>

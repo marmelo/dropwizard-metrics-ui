@@ -1,88 +1,72 @@
-import React from 'react';
-import Progress from 'antd/lib/progress';
-import Row from 'antd/lib/row';
-import Col from 'antd/lib/col';
+import React, { Component } from 'react';
 import Card from 'antd/lib/card';
-import prettyMs from 'pretty-ms';
-import prettyBytes from 'pretty-bytes';
-import { ResponsiveContainer, AreaChart, Area, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Legend } from 'recharts';
+import { getTimer, formatBytes, colors } from '../helpers';
 
-import AbstractWidget from '../AbstractWidget.js';
+class RequestMethodsWidget extends Component {
 
-class RequestMethodsWidget extends AbstractWidget {
-      
     constructor(props) {
         super(props);
-
-        this.data = [];
-        
-        this.requests1xx = 0;
-        this.requests2xx = 0;
-        this.requests3xx = 0;
-        this.requests4xx = 0;
-        this.requests5xx = 0;
+        this.state = {
+            data: []
+        };
     }
-    
+
+    componentWillReceiveProps(nextProps) {
+        const all = getTimer('io.dropwizard.jetty.MutableServletContextHandler.requests', nextProps.data).count;
+        const get = getTimer('io.dropwizard.jetty.MutableServletContextHandler.get-requests', nextProps.data).count;
+        const post = getTimer('io.dropwizard.jetty.MutableServletContextHandler.post-requests', nextProps.data).count;
+        const put = getTimer('io.dropwizard.jetty.MutableServletContextHandler.put-requests', nextProps.data).count;
+        const del = getTimer('io.dropwizard.jetty.MutableServletContextHandler.delete-requests', nextProps.data).count;
+
+        this.setState(prevState => {
+            const data = [];
+            if (prevState.get >= 0) {
+                data.push({
+                    timestamp: new Date().getTime(),
+                    get: get - prevState.get,
+                    post: post - prevState.post,
+                    put: put - prevState.put,
+                    del: del - prevState.del,
+                    other: (all - get - post - put - del) - prevState.other
+                });
+            }
+
+            // new state
+            return {
+                get: get,
+                post: post,
+                put: put,
+                del: del,
+                other: all - get - post - put - del,
+                data: prevState.data.concat(data)
+            }
+        });
+    }
+
     render() {
-        const requestGet = this.getTimer('io.dropwizard.jetty.MutableServletContextHandler.get-requests') || {};
-        const requestPost = this.getTimer('io.dropwizard.jetty.MutableServletContextHandler.post-requests') || {};
-        const requestPut = this.getTimer('io.dropwizard.jetty.MutableServletContextHandler.put-requests') || {};
-        const requestDelete = this.getTimer('io.dropwizard.jetty.MutableServletContextHandler.delete-requests') || {};
-        
-        const rateGet = requestGet.count - this.requestGet;
-        const ratePost = requestPost.count - this.requestPost;
-        const ratePut = requestPut.count - this.requestPut;
-        const rateDelete = requestDelete.count - this.requestDelete;
-        
-        this.requestGet = requestGet.count;
-        this.requestPost = requestPost.count;
-        this.requestPut = requestPut.count;
-        this.requestDelete = requestDelete.count;
-        
-        // TODO wrong
-        if (!isNaN(rateGet)) {
-            this.data.push({
-                timestamp: new Date().getTime(),
-                rateGet: rateGet,
-                ratePost: ratePost,
-                ratePut: ratePut,
-                rateDelete: rateDelete
-            });
-        }
-        
-        // recharts require a new array instance
-        const data = this.data.slice();
-                
         const extra =
             <div className="card-extra">
-                <span>GET:</span> {requestGet.count}
-                <span>POST:</span> {requestPost.count}
-                <span>PUT:</span> {requestPut.count}
-                <span>DELETE:</span> {requestDelete.count}
-                <span>Other</span> {0}
+                <span>GET:</span> {this.state.get}
+                <span>POST:</span> {this.state.post}
+                <span>PUT:</span> {this.state.put}
+                <span>DELETE:</span> {this.state.del}
+                <span>Other:</span> {this.state.other}
             </div>;
-        
-        const color = {
-            red: "#ee4035",
-            orange: "#f37736",
-            yellow: "#fdf498",
-            green: "#7bc043",
-            blue: "#0392cf"
-        };
-        
+
         return (
             <Card title="Requests" type="inner" bordered={false} extra={extra}>
                 <ResponsiveContainer width="100%" height={250} className="card-graph">
-                    <LineChart data={data}>
+                    <LineChart data={this.state.data}>
                         <XAxis type="number" dataKey="timestamp" domain={["dataMin", "dataMax"]} tickFormatter={(ts) => new Date(ts).toLocaleTimeString()}/>
                         <YAxis type="number" domain={[0, "auto"]}/>
                         <CartesianGrid stroke="#eee"/>
                         <Legend verticalAlign="bottom" height={36}/>
-                        <Line type="monotone" dataKey="rateGet" name="GET" stroke={color.green} strokeWidth={2} dot={false} isAnimationActive={false}/>
-                        <Line type="monotone" dataKey="ratePost" name="POST" stroke={color.blue} strokeWidth={2} dot={false} isAnimationActive={false}/>
-                        <Line type="monotone" dataKey="ratePut" name="PUT" stroke={color.orange} strokeWidth={2} dot={false} isAnimationActive={false}/>
-                        <Line type="monotone" dataKey="rateDelete" name="DELETE" stroke={color.red} strokeWidth={2} dot={false} isAnimationActive={false}/>
-                        <Line type="monotone" dataKey="rateOther" name="Other" stroke={color.yellow} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="monotone" dataKey="get" name="GET" stroke={colors.green} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="monotone" dataKey="post" name="POST" stroke={colors.blue} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="monotone" dataKey="put" name="PUT" stroke={colors.orange} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="monotone" dataKey="delete" name="DELETE" stroke={colors.red} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="monotone" dataKey="other" name="Other" stroke={colors.yellow} strokeWidth={2} dot={false} isAnimationActive={false}/>
                     </LineChart>
                 </ResponsiveContainer>
             </Card>

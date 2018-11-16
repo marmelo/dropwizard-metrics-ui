@@ -1,15 +1,9 @@
-import React from 'react';
-import Progress from 'antd/lib/progress';
-import Row from 'antd/lib/row';
-import Col from 'antd/lib/col';
+import React, { Component } from 'react';
 import Card from 'antd/lib/card';
+import LogLevelsWidget from './log/LogLevelsWidget'
 
-import AbstractWidget from './AbstractWidget.js';
+class LogWidget extends Component {
 
-import LogLevelsWidget from './log/LogLevelsWidget.js'
-
-class LogWidget extends AbstractWidget {
-    
     render() {
         return (
             <Card title="Logging" className="dwm-log">

@@ -16,7 +16,7 @@ import './App.scss';
 import logo from './dropwizard.png';
 
 class App extends Component {
-    
+
     constructor(props) {
         super(props);
 
@@ -30,7 +30,7 @@ class App extends Component {
             }
         };
     }
-    
+
     componentDidMount() {
         this.timer();
         this.interval = setInterval(this.timer.bind(this), 1000);
@@ -39,26 +39,16 @@ class App extends Component {
     componentWillUnmount() {
        clearInterval(this.interval);
     }
-    
+
     timer() {
         fetch('/metrics')
             .then(response => response.json())
             .then(responseJson => this.setState({
                 ts: new Date(),
                 data: responseJson
-            }))
-            .catch(error => this.setState({
-                data: {
-                    gauges: {},
-                    counters: {},
-                    histograms: {},
-                    meters: {},
-                    timers: {}
-                },
-                error: error
             }));
     }
-    
+
     render() {
         return (
             <Layout>

@@ -1,19 +1,10 @@
-import React from 'react';
-import Progress from 'antd/lib/progress';
-import Row from 'antd/lib/row';
-import Col from 'antd/lib/col';
+import React, { Component } from 'react';
 import Card from 'antd/lib/card';
-import prettyMs from 'pretty-ms';
-import prettyBytes from 'pretty-bytes';
-import { ResponsiveContainer, AreaChart, Area, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import RequestStatusWidget from './requests/RequestStatusWidget'
+import RequestMethodsWidget from './requests/RequestMethodsWidget'
 
-import AbstractWidget from './AbstractWidget.js';
+class RequestsWidget extends Component {
 
-import RequestStatusWidget from './requests/RequestStatusWidget.js'
-import RequestMethodsWidget from './requests/RequestMethodsWidget.js'
-
-class RequestsWidget extends AbstractWidget {
-    
     render() {
         return (
             <Card title="Requests" className="dwm-requests">

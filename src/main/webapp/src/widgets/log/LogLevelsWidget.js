@@ -1,97 +1,72 @@
-import React from 'react';
-import Progress from 'antd/lib/progress';
-import Row from 'antd/lib/row';
-import Col from 'antd/lib/col';
+import React, { Component } from 'react';
 import Card from 'antd/lib/card';
-import prettyMs from 'pretty-ms';
-import prettyBytes from 'pretty-bytes';
-import { ResponsiveContainer, AreaChart, Area, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Legend } from 'recharts';
+import { getMeter, colors } from '../helpers';
 
-import AbstractWidget from '../AbstractWidget.js';
+class LogLevelsWidget extends Component {
 
-class LogLevelsWidget extends AbstractWidget {
-      
     constructor(props) {
         super(props);
-
-        this.data = [];
-        
-        this.all = 0;
-        this.trace = 0;
-        this.debug = 0;
-        this.info = 0;
-        this.warn = 0;
-        this.error = 0;
+        this.state = {
+            data: []
+        };
     }
-    
+
+    componentWillReceiveProps(nextProps) {
+        const trace = getMeter('ch.qos.logback.core.Appender.trace', nextProps.data).count;
+        const debug = getMeter('ch.qos.logback.core.Appender.debug', nextProps.data).count;
+        const info = getMeter('ch.qos.logback.core.Appender.info', nextProps.data).count;
+        const warn = getMeter('ch.qos.logback.core.Appender.warn', nextProps.data).count;
+        const error = getMeter('ch.qos.logback.core.Appender.error', nextProps.data).count;
+
+        this.setState(prevState => {
+            const data = [];
+            if (prevState.info >= 0) {
+                data.push({
+                    timestamp: new Date().getTime(),
+                    trace: trace - prevState.trace,
+                    debug: debug - prevState.debug,
+                    info: info - prevState.info,
+                    warn: warn - prevState.warn,
+                    error: error - prevState.error
+                });
+            }
+
+            // new state
+            return {
+                trace: trace,
+                debug: debug,
+                info: info,
+                warn: warn,
+                error: error,
+                data: prevState.data.concat(data)
+            }
+        });
+    }
+
     render() {
-        const levelAll = this.getMeter('ch.qos.logback.core.Appender.all') || {};
-        const levelTrace = this.getMeter('ch.qos.logback.core.Appender.trace') || {};
-        const levelDebug = this.getMeter('ch.qos.logback.core.Appender.debug') || {};
-        const levelInfo = this.getMeter('ch.qos.logback.core.Appender.info') || {};
-        const levelWarn = this.getMeter('ch.qos.logback.core.Appender.warn') || {};
-        const levelError = this.getMeter('ch.qos.logback.core.Appender.error') || {};
-        
-        const rateAll = levelAll.count - this.all;
-        const rateTrace = levelTrace.count - this.trace;
-        const rateDebug = levelDebug.count - this.debug;
-        const rateInfo = levelInfo.count - this.info;
-        const rateWarn = levelWarn.count - this.warn;
-        const rateError = levelError.count - this.error;
-        
-        this.all = levelAll.count;
-        this.trace = levelTrace.count;
-        this.debug = levelDebug.count;
-        this.info = levelInfo.count;
-        this.warn = levelWarn.count;
-        this.error = levelError.count;
-        
-        // TODO wrong
-        if (!isNaN(rateInfo)) {
-            this.data.push({
-                timestamp: new Date().getTime(),
-                rateTrace: rateTrace,
-                rateDebug: rateDebug,
-                rateInfo: rateInfo,
-                rateWarn: rateWarn,
-                rateError: rateError
-            });
-        }
-        
-        // recharts require a new array instance
-        const data = this.data.slice();
-                
         const extra =
             <div className="card-extra">
-                <span>Total:</span> {levelAll.count}
-                <span>Trace:</span> {levelTrace.count}
-                <span>Debug:</span> {levelDebug.count}
-                <span>Info:</span> {levelInfo.count}
-                <span>Warn:</span> {levelWarn.count}
-                <span>Error:</span> {levelError.count}
+                <span>Trace:</span> {this.state.trace}
+                <span>Debug:</span> {this.state.debug}
+                <span>Info:</span> {this.state.info}
+                <span>Warn:</span> {this.state.warn}
+                <span>Error:</span> {this.state.error}
             </div>;
-        
-        const color = {
-            red: "#ee4035",
-            orange: "#f37736",
-            yellow: "#fdf498",
-            green: "#7bc043",
-            blue: "#0392cf"
-        };
-        
+
         return (
             <Card title="Logs" type="inner" bordered={false} extra={extra}>
                 <ResponsiveContainer width="100%" height={250} className="card-graph">
-                    <LineChart data={data}>
+                    <LineChart data={this.state.data}>
                         <XAxis type="number" dataKey="timestamp" domain={["dataMin", "dataMax"]} tickFormatter={(ts) => new Date(ts).toLocaleTimeString()}/>
                         <YAxis type="number" domain={[0, "auto"]}/>
                         <CartesianGrid stroke="#eee"/>
                         <Legend verticalAlign="bottom" height={36}/>
-                        <Line type="monotone" dataKey="rateTrace" name="Trace" stroke={color.yellow} strokeWidth={2} dot={false} isAnimationActive={false}/>
-                        <Line type="monotone" dataKey="rateDebug" name="Debug" stroke={color.blue} strokeWidth={2} dot={false} isAnimationActive={false}/>
-                        <Line type="monotone" dataKey="rateInfo" name="Info" stroke={color.green} strokeWidth={2} dot={false} isAnimationActive={false}/>
-                        <Line type="monotone" dataKey="rateWarn" name="Warn" stroke={color.orange} strokeWidth={2} dot={false} isAnimationActive={false}/>
-                        <Line type="monotone" dataKey="rateError" name="Error" stroke={color.red} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="monotone" dataKey="trace" name="Trace" stroke={colors.yellow} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="monotone" dataKey="debug" name="Debug" stroke={colors.blue} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="monotone" dataKey="info" name="Info" stroke={colors.green} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="monotone" dataKey="warn" name="Warn" stroke={colors.orange} strokeWidth={2} dot={false} isAnimationActive={false}/>
+                        <Line type="monotone" dataKey="error" name="Error" stroke={colors.red} strokeWidth={2} dot={false} isAnimationActive={false}/>
                     </LineChart>
                 </ResponsiveContainer>
             </Card>
