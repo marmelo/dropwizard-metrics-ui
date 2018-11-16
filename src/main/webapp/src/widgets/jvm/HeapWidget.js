@@ -41,11 +41,11 @@ class HeapWidget extends Component {
 
     render() {
         const extra =
-            <div className="card-extra">
+            <>
                 <span>Used:</span> {formatBytes(this.state.used)} ({(this.state.usage * 100.0).toFixed(1) + "%"})
                 <span>Size:</span> {formatBytes(this.state.committed)}
                 <span>Max:</span> {formatBytes(this.state.max)}
-            </div>;
+            </>;
 
         return (
             <Card title="Heap" type="inner" bordered={false} extra={extra}>

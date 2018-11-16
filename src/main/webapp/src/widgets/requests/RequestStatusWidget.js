@@ -46,13 +46,13 @@ class RequestStatusWidget extends Component {
 
     render() {
         const extra =
-            <div className="card-extra">
+            <>
                 <span>1xx:</span> {this.state.reqs1xx}
                 <span>2xx:</span> {this.state.reqs2xx}
                 <span>3xx:</span> {this.state.reqs3xx}
                 <span>4xx:</span> {this.state.reqs4xx}
                 <span>5xx:</span> {this.state.reqs5xx}
-            </div>;
+            </>;
 
         return (
             <Card title="Responses" type="inner" bordered={false} extra={extra}>

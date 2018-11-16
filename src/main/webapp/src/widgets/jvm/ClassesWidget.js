@@ -34,10 +34,10 @@ class ClassesWidget extends Component {
 
     render() {
         const extra =
-            <div className="card-extra">
+            <>
                 <span>Loaded:</span> {this.state.loaded}
                 <span>Unloaded:</span> {this.state.unloaded}
-            </div>;
+            </>;
 
         return (
             <Card title="Classes" type="inner" bordered={false} extra={extra}>

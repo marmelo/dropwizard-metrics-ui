@@ -46,13 +46,13 @@ class RequestMethodsWidget extends Component {
 
     render() {
         const extra =
-            <div className="card-extra">
+            <>
                 <span>GET:</span> {this.state.get}
                 <span>POST:</span> {this.state.post}
                 <span>PUT:</span> {this.state.put}
                 <span>DELETE:</span> {this.state.del}
                 <span>Other:</span> {this.state.other}
-            </div>;
+            </>;
 
         return (
             <Card title="Requests" type="inner" bordered={false} extra={extra}>

@@ -43,6 +43,16 @@
     max-width: 85%;
     white-space: nowrap;
     overflow: hidden;
+
+    div {
+        display: inline;
+        font-size: 10px;
+        margin-left: 10px;
+
+        span:not(:first-child) {
+            margin-left: 5px;
+        }
+    }
 }
 
 .dwm-jvm .ant-card-grid .ant-card-body,

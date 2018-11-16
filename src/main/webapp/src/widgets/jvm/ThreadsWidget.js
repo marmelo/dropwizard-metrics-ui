@@ -46,14 +46,16 @@ class ThreadsWidget extends Component {
 
     render() {
         const extra =
-            <div className="card-extra">
+            <>
                 <span>Live:</span> {this.state.all}
-                <span>(Runnable:</span> {this.state.runnable}
-                <span>Time Waiting:</span> {this.state.timedWaiting}
-                <span>Waiting:</span> {this.state.waiting}
-                <span>Blocked:</span> {this.state.blocked})
+                <div>
+                    <span>(Runnable:</span> {this.state.runnable}
+                    <span>Timed Waiting:</span> {this.state.timedWaiting}
+                    <span>Waiting:</span> {this.state.waiting}
+                    <span>Blocked:</span> {this.state.blocked})
+                </div>
                 <span>Daemon:</span> {this.state.daemon}
-            </div>;
+            </>;
 
         return (
             <Card title="Threads" type="inner" bordered={false} extra={extra}>

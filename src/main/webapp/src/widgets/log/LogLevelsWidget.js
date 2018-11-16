@@ -46,13 +46,13 @@ class LogLevelsWidget extends Component {
 
     render() {
         const extra =
-            <div className="card-extra">
+            <>
                 <span>Trace:</span> {this.state.trace}
                 <span>Debug:</span> {this.state.debug}
                 <span>Info:</span> {this.state.info}
                 <span>Warn:</span> {this.state.warn}
                 <span>Error:</span> {this.state.error}
-            </div>;
+            </>;
 
         return (
             <Card title="Logs" type="inner" bordered={false} extra={extra}>
