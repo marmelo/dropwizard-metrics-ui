@@ -1,7 +1,7 @@
 # Dropwizard Metrics UI
 
 [![Build Status](https://api.travis-ci.com/marmelo/dropwizard-metrics-ui.svg?branch=master)](https://travis-ci.com/marmelo/dropwizard-metrics-ui)
-[![Maven Central](https://img.shields.io/badge/maven--central-X.X-blue.svg)](http://search.maven.org/#artifactdetails|org.marmelo.dropwizard|dropwizard-metrics-ui|1.0|jar)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.marmelo.dropwizard/dropwizard-metrics-ui/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.marmelo.dropwizard/dropwizard-metrics-ui)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/marmelo/dropwizard-metrics-ui/blob/master/LICENSE)
 
 **Dropwizard Metrics UI** is a [Dropwizard](https://www.dropwizard.io/) `Bundle` that exposes the registered [Dropwizard Metrics](https://metrics.dropwizard.io/) and displays its core metrics in a dashboard.
@@ -17,7 +17,7 @@ Just add the following dependency to your `pom.xml`:
 <dependency>
     <groupId>org.marmelo.dropwizard</groupId>
     <artifactId>dropwizard-metrics-ui</artifactId>
-    <version>X.X</version>
+    <version>1.0</version>
 </dependency>
 ```
 
