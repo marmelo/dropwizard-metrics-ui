@@ -1,6 +1,6 @@
 {
     "name": "dropwizard-metrics-ui",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "dependencies": {
         "antd": "^3.10.0",
         "pretty-bytes": "^5.1.0",
