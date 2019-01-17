@@ -41,7 +41,7 @@ class App extends Component {
     }
 
     timer() {
-        fetch('/metrics')
+        fetch('metrics')
             .then(response => response.json())
             .then(responseJson => this.setState({
                 ts: new Date(),
