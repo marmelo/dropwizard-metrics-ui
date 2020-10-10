@@ -3,3 +3,6 @@
 /src/main/webapp/node_modules
 /src/main/webapp/package-lock.json
 /src/main/resources/org/marmelo/dropwizard/metrics/*
+
+.idea/*
+*.iml

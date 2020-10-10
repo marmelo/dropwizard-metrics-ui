@@ -51,15 +51,7 @@ class App extends Component {
 
     render() {
         return (
-            <Layout>
-                <Affix>
-                    <Header>
-                        <img src={logo} className="logo"/>
-                        <div className="title">Dropwizard Metrics</div>
-                        <span className="timestamp">{ this.state.ts && this.state.ts.toGMTString() }</span>
-                    </Header>
-                </Affix>
-                <Content style={{margin: '0 40px' }}>
+<table>
                     <Row gutter={16}>
                         <Col span={24}>
                             <OverviewWidget data={this.state.data}/>
@@ -85,11 +77,7 @@ class App extends Component {
                             <MetricsWidget data={this.state.data}/>
                         </Col>
                     </Row>
-                </Content>
-                <Footer style={{textAlign: 'center' }}>
-                    © 2018 Created by <a src="https://github.com/marmelo">Rafael Marmelo</a> &nbsp;&bull;&nbsp; Fork me on <a src="https://github.com/marmelo/dropwizard-metrics-ui">GitHub</a> &nbsp;&bull;&nbsp; <a src="https://opensource.org/licenses/MIT">MIT License</a> &nbsp;&bull;&nbsp; Created using <a src="https://www.dropwizard.io/">Dropwizard</a>, <a src="https://ant.design/">Ant Design</a>, <a src="https://reactjs.org/">React</a> and <a src="https://recharts.org/">Recharts</a>
-                </Footer>
-            </Layout>
+</table>
         );
     }
 }
